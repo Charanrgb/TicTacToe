@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html style="background-color:lightskyblue";>
+    <head>
+       <style>
+           .flex-container{
+               display: flex;
+               flex-wrap: wrap;
+               width:30rem;
+               height:30rem;
+               box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+               margin: auto;
+               transform:translate(0px,130px);
+           }
+           .smallbox{
+            border: 1px solid black;
+            height:10rem;
+            width:10rem;
+            background-color: white;
+            font-size: xx-large;
+           }
+           .smallbox:hover{
+               background-color: rgb(0, 157, 255);
+           }
+       </style> 
+    </head>
+    <body onload="setup()">
+        <div class="flex-container">
+            
+            <button onclick="react(this.id)" class="smallbox" id="1"> </button>
+            <button onclick="react(this.id)" class="smallbox" id="2"></button>
+            <button onclick="react(this.id)" class="smallbox" id="3"></button>
+            <button onclick="react(this.id)" class="smallbox"id="4"></button>
+            <button onclick="react(this.id)" class="smallbox"id="5"></button>
+            <button onclick="react(this.id)" class="smallbox"id="6"></button>
+            <button onclick="react(this.id)" class="smallbox"id="7"></button>
+            <button onclick="react(this.id)" class="smallbox"id="8"></button>
+            <button onclick="react(this.id)" class="smallbox"id="9"></button>
+            
+        </div>
+        <div id="test"></div>
+    </body>
+    <script type="text/javascript">
+    var count=1;
+    var won=0;
+    const gg=[0,0,6,7,8,9,10,110,210];
+    const possible_combinations=[[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6],[0,3,6],[1,4,7],[2,5,8]];
+    function setup(){
+         //NOT WORKING
+    }
+    function react(no){
+        var boxes = document.getElementsByClassName("smallbox");
+            if(gg[parseInt(no)-1]!=1 && gg[parseInt(no)-1]!=2){                              //DISPLAY X AND O
+                if(count%2==0){
+                document.getElementById(no).innerHTML="O";
+                document.getElementById(no).style.color="black";
+                gg[parseInt(no)-1]=1;
+                }
+                else{
+                document.getElementById(no).innerHTML="X";
+                document.getElementById(no).style.color="red";
+                gg[parseInt(no)-1]=2;
+                }
+        count++;
+    }
+    for(var i=0;i<8;i++){
+            for(var j=0;j<1;j++){
+                if(gg[possible_combinations[i][j]]==gg[possible_combinations[i][j+1]]&&gg[possible_combinations[i][j+1]]==gg[possible_combinations[i][j+2]])
+                    won=1;
+            }
+        }
+        
+        if(won==1){
+            if(count%2==0)
+        alert('X WON');
+        else
+        alert('O WON');
+        }
+        
+}
+    </script>
+</html>
